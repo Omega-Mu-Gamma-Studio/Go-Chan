@@ -1,30 +1,32 @@
 {
   "id": "4.1",
-  "title": "What is the STL?",
-  "type": "conceptual",
+  "title": "fmt and Formatting",
+  "type": "coding",
   "phase1": {
-    "code": "",
-    "output": "",
-    "explanation": "🎮 **The Standard Template Library (STL) is C++'s weapon arsenal.**\n\n**What is the STL?**\n\nThe STL is a collection of powerful, reusable components that handle common programming tasks. It's part of the C++ Standard Library.\n\nInstead of writing your own linked list, dynamic array, or sorting algorithm, you use STL containers and algorithms. They're fast, tested, and optimized.\n\n**The Four Pillars of STL:**\n\n| Pillar | What it does | Examples |\n|--------|--------------|----------|\n| **Containers** | Store data | `std::vector`, `std::map`, `std::set` |\n| **Algorithms** | Process data | `std::sort`, `std::find`, `std::copy` |\n| **Iterators** | Connect containers and algorithms | `begin()`, `end()`, `std::iterator` |\n| **Functors** | Callable objects | Function pointers, lambdas |\n\n**Why STL matters for games:**\n\n| Use | STL Component |\n|-----|---------------|\n| **Player inventory** | `std::vector<Item>` |\n| **Enemy roster** | `std::list<Enemy*>` |\n| **Item database** | `std::unordered_map<int, Item>` |\n| **High scores** | `std::set<int>` |\n| **Search/sort** | `std::find`, `std::sort` |\n\n**Benefits of using STL:**\n\n| Benefit | Why |\n|---------|-----|\n| **Performance** | Highly optimized |\n| **Reliability** | Well-tested |\n| **Portability** | Works on all platforms |\n| **Productivity** | Write less code |\n| **Readability** | Standard naming |\n\n**Common STL Containers:**\n\n| Container | Use |\n|-----------|-----|\n| `std::vector` | Dynamic array, fast random access |\n| `std::array` | Fixed-size array |\n| `std::list` | Doubly-linked list |\n| `std::map` | Key-value pairs (sorted) |\n| `std::unordered_map` | Key-value pairs (hash table) |\n| `std::set` | Unique elements (sorted) |\n| `std::unordered_set` | Unique elements (hash table) |\n| `std::queue` | FIFO queue |\n| `std::stack` | LIFO stack |\n| `std::deque` | Double-ended queue |\n\n**PlusPlus-chan says:**\n\"The STL is your toolbox. You could build everything from scratch — but why would you? Use the tools. Build your game, not the wheel.\"",
-    "openingDialogue": "The STL: your game dev toolkit. Ready to use. ⚔️"
+    "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    // ---- Basic printing ----\n    fmt.Println(\"=== fmt and Formatting ===\")\n    \n    // ---- Println ----\n    fmt.Println(\"Hello, World!\")\n    fmt.Println(\"Multiple\", \"values\", \"with\", \"Println\")\n    \n    // ---- Printf (formatted printing) ----\n    name := \"Hero\"\n    health := 100\n    attack := 20.5\n    \n    fmt.Printf(\"Name: %s\\n\", name)\n    fmt.Printf(\"Health: %d\\n\", health)\n    fmt.Printf(\"Attack: %.2f\\n\", attack)\n    \n    // ---- Format specifiers ----\n    // %v = default format\n    // %+v = with field names\n    // %#v = Go-syntax representation\n    // %T = type\n    \n    type Player struct {\n        Name   string\n        Health int\n    }\n    \n    p := Player{Name: \"Hero\", Health: 100}\n    \n    fmt.Printf(\"Default: %v\\n\", p)\n    fmt.Printf(\"With fields: %+v\\n\", p)\n    fmt.Printf(\"Go-syntax: %#v\\n\", p)\n    fmt.Printf(\"Type: %T\\n\", p)\n    \n    // ---- Print to string ----\n    s := fmt.Sprintf(\"Name: %s, Health: %d\", name, health)\n    fmt.Println(\"Sprintf:\", s)\n    \n    // ---- Print to error ----\n    err := fmt.Errorf(\"error: %s not found\", name)\n    fmt.Println(\"Error:\", err)\n    \n    // ---- Formatting numbers ----\n    num := 12345.6789\n    \n    fmt.Printf(\"Default: %f\\n\", num)\n    fmt.Printf(\"Two decimals: %.2f\\n\", num)\n    fmt.Printf(\"Scientific: %e\\n\", num)\n    fmt.Printf(\"Commas: %,.2f\\n\", num)\n    \n    // ---- Formatting integers ----\n    n := 255\n    \n    fmt.Printf(\"Decimal: %d\\n\", n)\n    fmt.Printf(\"Binary: %b\\n\", n)\n    fmt.Printf(\"Octal: %o\\n\", n)\n    fmt.Printf(\"Hex: %x\\n\", n)\n    fmt.Printf(\"Upper Hex: %X\\n\", n)\n    \n    // ---- Formatting strings ----\n    str := \"Hello, World!\"\n    \n    fmt.Printf(\"String: %s\\n\", str)\n    fmt.Printf(\"Quoted: %q\\n\", str)\n    fmt.Printf(\"Width: %20s\\n\", str)\n    fmt.Printf(\"Left aligned: %-20s\\n\", str)\n    \n    // ---- Formatting structs ----\n    fmt.Printf(\"Struct: %+v\\n\", p)\n    \n    // ---- Fprint (write to file or writer) ----\n    // fmt.Fprint(writer, \"Hello\")\n    \n    // ---- Scan ----\n    // var input string\n    // fmt.Scanln(&input)\n    // fmt.Printf(\"You entered: %s\\n\", input)\n}",
+    "output": "=== fmt and Formatting ===\nHello, World!\nMultiple values with Println\nName: Hero\nHealth: 100\nAttack: 20.50\nDefault: {Hero 100}\nWith fields: {Name:Hero Health:100}\nGo-syntax: main.Player{Name:\"Hero\", Health:100}\nType: main.Player\nSprintf: Name: Hero, Health: 100\nError: error: Hero not found\nDefault: 12345.678900\nTwo decimals: 12345.68\nScientific: 1.234568e+04\nCommas: 12,345.68\nDecimal: 255\nBinary: 11111111\nOctal: 377\nHex: ff\nUpper Hex: FF\nString: Hello, World!\nQuoted: \"Hello, World!\"\nWidth:         Hello, World!\nLeft aligned: Hello, World!        \nStruct: {Name:Hero Health:100}",
+    "explanation": "🦫 **fmt provides formatted I/O.**\n\n**Format specifiers:**\n\n| Specifier | Use |\n|-----------|-----|\n| `%v` | Default format |\n| `%+v` | With field names |\n| `%#v` | Go-syntax |\n| `%T` | Type |\n| `%s` | String |\n| `%d` | Integer |\n| `%f` | Float |\n| `%.2f` | Float with 2 decimals |\n| `%t` | Boolean |\n| `%p` | Pointer |\n\n**Go-chan says:**\n\"fmt is the most used package. Master it.\"\n\n**Print functions:**\n| Function | Use |\n|----------|-----|\n| `Println` | Print with newline |\n| `Printf` | Formatted print |\n| `Sprintf` | Print to string |\n| `Errorf` | Print to error |\n| `Fprint` | Print to writer |\n| `Scanln` | Scan input |",
+    "openingDialogue": "fmt. Formatted I/O. Master it. 🦫"
   },
   "phase2": {
-    "brokenCode": "",
-    "errorMessage": "",
-    "explanation": "Conceptual lesson — no broken code here!\n\n**Common misconception:** \"STL is slow, I should write my own containers.\"\n\nActually: STL is highly optimized. Writing your own containers is rarely faster unless you have very specific needs. The STL has been refined over decades.\n\n**Another misconception:** \"STL is hard to learn.\"\n\nActually: STL containers work similarly. Once you learn `std::vector`, you can use most other containers easily. They share common interfaces.\n\n**PlusPlus-chan says:**\n\"Don't reinvent the wheel. The STL is your friend. Use it.\""
+    "brokenCode": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    // Forgetting format specifier\n    fmt.Printf(\"Hello\")  // No newline\n    fmt.Printf(\"World\")  // Same line\n}",
+    "errorMessage": "HelloWorld\n\n(Printf doesn't add a newline by default.)",
+    "explanation": "`Printf` doesn't add a newline. Use `\\n` or `Println`.\n\n**The fix:**\n```go\nfmt.Printf(\"Hello\\n\")\nfmt.Printf(\"World\\n\")\n```\n\n**Go-chan says:**\n\"Printf doesn't add newlines. Use `\\n` or `Println`.\""
   },
   "phase3": {
-    "prompt": "Which statement about the STL is TRUE?\n\nA) The STL is an external library you need to download separately\nB) STL containers are not well-suited for game development\nC) STL provides containers, algorithms, and iterators\nD) `std::vector` is a fixed-size container\n\nSelect the CORRECT answer.",
+    "prompt": "Write a Go program that:\n\n1. Prints \"Hello\" and \"World\" on separate lines using `Println`\n2. Prints a formatted string with `Printf`:\n   - Name: \"Hero\"\n   - Health: 100\n   - Attack: 20.50\n3. Uses `Sprintf` to create a string and prints it\n\nRequirements:\n- No semicolons\n- Use `Println`, `Printf`, `Sprintf`",
     "validationPattern": {
-      "mcqAnswer": "C"
+      "required": ["fmt.Println", "fmt.Printf", "fmt.Sprintf", "fmt.Println"],
+      "forbidden": [";"],
+      "fullRegex": "fmt\\.Println[\\s\\S]*fmt\\.Printf[\\s\\S]*fmt\\.Sprintf[\\s\\S]*fmt\\.Println"
     },
     "dialogueHints": [
-      "Think about what the STL actually includes.",
-      "The STL is part of the C++ Standard Library.",
-      "What are the four pillars of the STL?"
+      "`fmt.Println(\"Hello\"); fmt.Println(\"World\")`",
+      "`fmt.Printf(\"Name: %s, Health: %d, Attack: %.2f\\n\", \"Hero\", 100, 20.50)`",
+      "`s := fmt.Sprintf(\"Hello, %s!\", \"Hero\"); fmt.Println(s)`"
     ],
-    "solution": null,
-    "openingDialogue": "Let's see if you understand the STL. 🤔"
+    "solution": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello\")\n    fmt.Println(\"World\")\n    \n    fmt.Printf(\"Name: %s, Health: %d, Attack: %.2f\\n\", \"Hero\", 100, 20.50)\n    \n    s := fmt.Sprintf(\"Hello, %s!\", \"Hero\")\n    fmt.Println(s)\n}",
+    "openingDialogue": "fmt. Formatted I/O. Show me. 🦫"
   },
   "xpReward": 10
 }

@@ -1,33 +1,33 @@
 {
   "id": "1.6",
-  "title": "Taking Input — the player types something",
+  "title": "Basic Types",
   "type": "coding",
   "phase1": {
-    "code": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string playerName;\n    int playerAge;\n    \n    // Ask for input\n    std::cout << \"Welcome, adventurer!\" << std::endl;\n    std::cout << \"What is your name? \";\n    std::cin >> playerName;\n    \n    std::cout << \"How old are you, \" << playerName << \"? \";\n    std::cin >> playerAge;\n    \n    std::cout << \"\\n=== Character Sheet ===\" << std::endl;\n    std::cout << \"Name: \" << playerName << std::endl;\n    std::cout << \"Age: \" << playerAge << std::endl;\n    \n    // Input with multiple words\n    std::cin.ignore();  // Clear the buffer\n    std::string fullName;\n    std::cout << \"Enter your full name (with spaces): \";\n    std::getline(std::cin, fullName);\n    std::cout << \"Full name: \" << fullName << std::endl;\n    \n    return 0;\n}",
-    "output": "Welcome, adventurer!\nWhat is your name? Hero\nHow old are you, Hero? 25\n\n=== Character Sheet ===\nName: Hero\nAge: 25\nEnter your full name (with spaces): Hero the Brave\nFull name: Hero the Brave",
-    "explanation": "🎮 **Input is how the player controls your game.**\n\n`std::cin` — Console input. It reads what the player types.\n\n**Reading different types:**\n| Type | How to read |\n|------|-------------|\n| `int` | `std::cin >> variable;` |\n| `double` | `std::cin >> variable;` |\n| `std::string` (no spaces) | `std::cin >> variable;` |\n| `std::string` (with spaces) | `std::getline(std::cin, variable);` |\n\n**Common issue (and fix):**\n- `std::cin >>` leaves a newline in the buffer\n- `std::cin.ignore()` clears the buffer before `getline()`\n\n**Game design note:**\nIn a real game, you'd use input for:\n- Character creation (name, class, stats)\n- Menu selections (\"Press 1 to attack\")\n- Saving/loading (\"Enter save name:\")\n\n**PlusPlus-chan says:**\n\"Java-chan has `Scanner`. I have `std::cin`. Same concept, but I don't hide the buffer management from you. You need to know why `getline()` behaves differently.\"",
-    "openingDialogue": "Now the player can talk back. This is when it gets real. 🎮💬"
+    "code": "package main\n\nimport (\n    \"fmt\"\n    \"math\"\n)\n\nfunc main() {\n    // ---- Numeric types ----\n    var i int = 42\n    var i8 int8 = 127\n    var i16 int16 = 32767\n    var i32 int32 = 2147483647\n    var i64 int64 = 9223372036854775807\n    \n    var u uint = 42\n    var u8 uint8 = 255\n    var u16 uint16 = 65535\n    var u32 uint32 = 4294967295\n    var u64 uint64 = 18446744073709551615\n    \n    // ---- Floating point ----\n    var f32 float32 = 3.14\n    var f64 float64 = 3.14159\n    \n    // ---- Boolean ----\n    var b1 bool = true\n    var b2 bool = false\n    \n    // ---- String ----\n    var s1 string = \"Hello, World!\"\n    var s2 string = `This is a raw string\n    with newlines\n    and \"quotes\"`\n    \n    // ---- Byte (alias for uint8) ----\n    var b byte = 65  // ASCII 'A'\n    \n    // ---- Rune (alias for int32, Unicode code point) ----\n    var r rune = '中'\n    \n    fmt.Println(\"int:\", i)\n    fmt.Println(\"int8:\", i8)\n    fmt.Println(\"int16:\", i16)\n    fmt.Println(\"int32:\", i32)\n    fmt.Println(\"int64:\", i64)\n    fmt.Println(\"uint:\", u)\n    fmt.Println(\"uint8:\", u8)\n    fmt.Println(\"uint16:\", u16)\n    fmt.Println(\"uint32:\", u32)\n    fmt.Println(\"uint64:\", u64)\n    fmt.Println(\"float32:\", f32)\n    fmt.Println(\"float64:\", f64)\n    fmt.Println(\"bool1:\", b1)\n    fmt.Println(\"bool2:\", b2)\n    fmt.Println(\"string1:\", s1)\n    fmt.Println(\"string2:\", s2)\n    fmt.Println(\"byte:\", b)\n    fmt.Println(\"rune:\", r)\n    \n    // ---- Type conversion ----\n    var x int = 42\n    var y float64 = float64(x)\n    var z uint = uint(x)\n    \n    fmt.Println(\"Int:\", x)\n    fmt.Println(\"Float from int:\", y)\n    fmt.Println(\"Uint from int:\", z)\n}",
+    "output": "int: 42\nint8: 127\nint16: 32767\nint32: 2147483647\nint64: 9223372036854775807\nuint: 42\nuint8: 255\nuint16: 65535\nuint32: 4294967295\nuint64: 18446744073709551615\nfloat32: 3.14\nfloat64: 3.14159\nbool1: true\nbool2: false\nstring1: Hello, World!\nstring2: This is a raw string\n    with newlines\n    and \"quotes\"\nbyte: 65\nrune: 中\nInt: 42\nFloat from int: 42\nUint from int: 42",
+    "explanation": "🦫 **Go has a small set of built-in types.**\n\n**Numeric types:**\n\n| Type | Range |\n|------|-------|\n| `int`, `uint` | Platform-dependent |\n| `int8`, `uint8` | -128 to 127, 0 to 255 |\n| `int16`, `uint16` | -32768 to 32767, 0 to 65535 |\n| `int32`, `uint32` | -2^31 to 2^31-1, 0 to 2^32-1 |\n| `int64`, `uint64` | -2^63 to 2^63-1, 0 to 2^64-1 |\n\n**Floating point:**\n\n| Type | Precision |\n|------|-----------|\n| `float32` | ~6 decimal digits |\n| `float64` | ~15 decimal digits |\n\n**Other types:**\n\n| Type | Use |\n|------|-----|\n| `bool` | `true` or `false` |\n| `string` | Text |\n| `byte` | ASCII character (uint8) |\n| `rune` | Unicode character (int32) |\n\n**Type conversion:**\n```go\nvar x int = 42\nvar y float64 = float64(x)\n```\n\n**Go-chan says:**\n\"Go has explicit type conversion. No automatic coercion. That's the point.\"",
+    "openingDialogue": "Go has a small set of types. That's the point. 🦫"
   },
   "phase2": {
-    "brokenCode": "#include <iostream>\n#include <string>\n\nint main() {\n    int age;\n    std::string name;\n    \n    std::cout << \"Enter your age: \";\n    std::cin >> age;\n    \n    std::cout << \"Enter your name: \";\n    std::getline(std::cin, name);  // Problem: this skips!\n    \n    std::cout << \"Name: \" << name << \", Age: \" << age << std::endl;\n    return 0;\n}",
-    "errorMessage": "Enter your age: 25\nEnter your name: Name: , Age: 25\n\n(No error — but the name input was SKIPPED!)",
-    "explanation": "This is the classic `cin` vs `getline()` trap.\n\n**What's happening:**\n1. `std::cin >> age` reads the number 25\n2. It leaves the newline character `\\n` in the buffer\n3. `std::getline()` reads that leftover newline as an empty string\n4. So `name` is empty, and the program skips the name input\n\n**The fix:**\n```cpp\nstd::cin >> age;\nstd::cin.ignore();  // ← This clears the buffer!\nstd::getline(std::cin, name);\n```\n\n**PlusPlus-chan says:**\n\"This is a rite of passage. Every C++ developer has been bitten by this. Now you know why.\""
+    "brokenCode": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    var x int = 42\n    var y float64 = x  // ERROR! Can't assign int to float64\n    fmt.Println(y)\n}",
+    "errorMessage": "cannot use x (type int) as type float64 in assignment\n\n(Go doesn't automatically convert types. You need explicit conversion.)",
+    "explanation": "Go doesn't perform implicit type conversion. You must convert explicitly.\n\n**The fix:**\n```go\nvar y float64 = float64(x)\n```\n\n**Go-chan says:**\n\"No implicit conversion. That's intentional. It makes code predictable.\""
   },
   "phase3": {
-    "prompt": "Write a C++ program that:\n\n1. Asks the player \"Enter your class (Warrior/Mage/Rogue): \" and stores it in a `std::string`\n2. Asks the player \"Enter your starting level: \" and stores it in an `int`\n3. Prints a character summary:\n```\n=== Character Created ===\nClass: [class]\nStarting Level: [level]\n```\n\nRequirements:\n- Use `std::cin` for the level (int)\n- Use `std::getline()` for the class (string with spaces allowed)\n- Handle the buffer issue correctly with `std::cin.ignore()`",
+    "prompt": "Write a Go program that:\n\n1. Declares `x` as `int` with value 100\n2. Converts `x` to `float64` and prints it\n3. Converts `x` to `uint8` (be careful of overflow!)\n4. Prints both converted values\n\nRequirements:\n- No semicolons\n- Use explicit type conversion",
     "validationPattern": {
-      "required": ["std::cin", "std::getline", "std::cin.ignore", "int", "std::string"],
-      "forbidden": ["using namespace"],
-      "fullRegex": "std::cin\\s*>>\\s*\\w+\\s*;[\\s\\S]*std::cin\\.ignore\\s*\\([\\s\\S]*\\)[\\s\\S]*std::getline\\s*\\(\\s*std::cin\\s*,\\s*\\w+\\s*\\)"
+      "required": ["var x int", "float64(x)", "uint8(x)", "fmt.Println"],
+      "forbidden": [";"],
+      "fullRegex": "var\\s+x\\s+int\\s*=\\s*100[\\s\\S]*float64\\s*\\(\\s*x\\s*\\)[\\s\\S]*uint8\\s*\\(\\s*x\\s*\\)[\\s\\S]*fmt\\.Println"
     },
     "dialogueHints": [
-      "Read the level with `std::cin >> level`",
-      "Call `std::cin.ignore();` before `getline()`",
-      "Read the class with `std::getline(std::cin, characterClass)`",
-      "Print both values"
+      "`var x int = 100`",
+      "`float64(x)` converts to float64",
+      "`uint8(x)` converts to uint8 (100 fits)",
+      "Print both values."
     ],
-    "solution": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string characterClass;\n    int level;\n    \n    std::cout << \"Enter your class (Warrior/Mage/Rogue): \";\n    std::getline(std::cin, characterClass);\n    \n    std::cout << \"Enter your starting level: \";\n    std::cin >> level;\n    \n    std::cout << \"\\n=== Character Created ===\" << std::endl;\n    std::cout << \"Class: \" << characterClass << std::endl;\n    std::cout << \"Starting Level: \" << level << std::endl;\n    \n    return 0;\n}",
-    "openingDialogue": "Let the player build their character. Make it real. 🎭"
+    "solution": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    var x int = 100\n    \n    fmt.Println(\"Original:\", x)\n    fmt.Println(\"As float64:\", float64(x))\n    fmt.Println(\"As uint8:\", uint8(x))\n}",
+    "openingDialogue": "Basic types. Convert explicitly. 🦫"
   },
   "xpReward": 10
 }

@@ -1,33 +1,33 @@
 {
   "id": "3.2",
-  "title": "Pointers — what they are and why",
+  "title": "Launching Goroutines",
   "type": "coding",
   "phase1": {
-    "code": "#include <iostream>\n\nint main() {\n    std::cout << \"=== Pointers Explained ===\" << std::endl;\n    \n    // 1. A variable stores a value\n    int health = 100;\n    std::cout << \"health: \" << health << std::endl;\n    std::cout << \"Address of health: \" << &health << std::endl;\n    \n    // 2. A pointer stores an address\n    int* healthPtr = &health;  // Pointer to health\n    std::cout << \"\\nhealthPtr: \" << healthPtr << std::endl;\n    std::cout << \"*healthPtr: \" << *healthPtr << std::endl;  // Dereference\n    \n    // 3. Null pointer\n    int* nullPtr = nullptr;\n    std::cout << \"\\nnullPtr: \" << nullPtr << std::endl;\n    \n    // 4. Pointer to pointer\n    int** doublePtr = &healthPtr;\n    std::cout << \"\\ndoublePtr: \" << doublePtr << std::endl;\n    std::cout << \"*doublePtr: \" << *doublePtr << std::endl;\n    std::cout << \"**doublePtr: \" << **doublePtr << std::endl;\n    \n    // 5. Modifying through pointer\n    std::cout << \"\\n=== Modifying through pointer ===\" << std::endl;\n    *healthPtr = 150;\n    std::cout << \"After *healthPtr = 150:\" << std::endl;\n    std::cout << \"health: \" << health << std::endl;\n    std::cout << \"*healthPtr: \" << *healthPtr << std::endl;\n    \n    // 6. Pointer arithmetic (dangerous!)\n    int arr[5] = {10, 20, 30, 40, 50};\n    int* arrPtr = arr;  // Points to first element\n    std::cout << \"\\n=== Pointer Arithmetic ===\" << std::endl;\n    std::cout << \"arr[0]: \" << *arrPtr << std::endl;\n    std::cout << \"arr[1]: \" << *(arrPtr + 1) << std::endl;\n    std::cout << \"arr[2]: \" << *(arrPtr + 2) << std::endl;\n    \n    return 0;\n}",
-    "output": "=== Pointers Explained ===\nhealth: 100\nAddress of health: 0x7ffffeeeee\n\nhealthPtr: 0x7ffffeeeee\n*healthPtr: 100\n\nnullPtr: 0\n\ndoublePtr: 0x7ffffffeed\n*doublePtr: 0x7ffffeeeee\n**doublePtr: 100\n\n=== Modifying through pointer ===\nAfter *healthPtr = 150:\nhealth: 150\n*healthPtr: 150\n\n=== Pointer Arithmetic ===\narr[0]: 10\narr[1]: 20\narr[2]: 30",
-    "explanation": "🎮 **A pointer is a variable that stores a memory address.**\n\n**Key concepts:**\n\n| Concept | Syntax | Meaning |\n|---------|--------|---------|\n| Declaration | `int* ptr` | Pointer to int |\n| Address-of | `&var` | Gets address of variable |\n| Dereference | `*ptr` | Gets value at address |\n| Null pointer | `nullptr` | Points to nothing (safe) |\n\n**Why use pointers in games:**\n\n| Use | Example |\n|-----|---------|\n| Dynamic allocation | `new Enemy()` returns a pointer |\n| Passing large objects | Pass pointer instead of copying |\n| Polymorphism | Base class pointers to derived objects |\n| Modifying variables | Change a variable from a function |\n\n**PlusPlus-chan says:**\n\"Pointers are the key to understanding C++. They're not scary — they're just addresses. Every variable lives somewhere in memory. Pointers tell you where.\"\n\n**⚠️ Important:**\n- Always initialize pointers\n- Use `nullptr` for null pointers\n- Don't dereference null pointers (crashes!)\n- Pointer arithmetic is powerful but dangerous",
-    "openingDialogue": "Pointers. Not scary. Just addresses. 🔗"
+    "code": "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\n// ---- Functions as goroutines ----\nfunc printNumbers(name string) {\n    for i := 1; i <= 3; i++ {\n        fmt.Printf(\"%s: %d\\n\", name, i)\n        time.Sleep(50 * time.Millisecond)\n    }\n}\n\n// ---- Anonymous functions as goroutines ----\nfunc main() {\n    fmt.Println(\"=== Launching Goroutines ===\")\n    \n    // ---- Named function ----\n    go printNumbers(\"A\")\n    go printNumbers(\"B\")\n    \n    // ---- Anonymous function ----\n    go func() {\n        for i := 1; i <= 3; i++ {\n            fmt.Printf(\"C: %d\\n\", i)\n            time.Sleep(50 * time.Millisecond)\n        }\n    }()\n    \n    // ---- Function with parameters ----\n    go func(msg string, count int) {\n        for i := 0; i < count; i++ {\n            fmt.Println(msg, i)\n            time.Sleep(50 * time.Millisecond)\n        }\n    }(\"D:\", 3)\n    \n    // ---- Goroutines with closures ----\n    for i := 0; i < 3; i++ {\n        // Capturing i by value\n        go func(n int) {\n            fmt.Printf(\"Closure: %d\\n\", n)\n        }(i)\n    }\n    \n    // ---- Wait for all to finish ----\n    time.Sleep(500 * time.Millisecond)\n    fmt.Println(\"Done\")\n}",
+    "output": "=== Launching Goroutines ===\nA: 1\nB: 1\nC: 1\nD: 0\nClosure: 0\nClosure: 1\nClosure: 2\nA: 2\nB: 2\nC: 2\nD: 1\nA: 3\nB: 3\nC: 3\nD: 2\nDone",
+    "explanation": "🦫 **Goroutines can be launched from any function.**\n\n**Launching patterns:**\n\n| Pattern | Code |\n|---------|------|\n| Named function | `go functionName()` |\n| Anonymous | `go func() { ... }()` |\n| With params | `go func(x int) { ... }(5)` |\n| Closure | Captures variables |\n\n**Go-chan says:**\n\"Any function can be a goroutine. Just add `go`.\"\n\n**Important:**\n- Goroutines run concurrently\n- Order is not guaranteed\n- Use closures carefully (capture values)\n- Always wait or synchronize",
+    "openingDialogue": "Launch goroutines. Any function. Just add `go`. 🦫"
   },
   "phase2": {
-    "brokenCode": "#include <iostream>\n\nint main() {\n    int* ptr = nullptr;\n    \n    // Dereferencing null pointer!\n    std::cout << *ptr << std::endl;\n    \n    return 0;\n}",
-    "errorMessage": "Segmentation fault (core dumped)\n\n(Program crashes! Dereferencing nullptr is undefined behavior.)",
-    "explanation": "You dereferenced a null pointer! This is one of the most common C++ crashes.\n\n**What's happening:**\n1. `ptr` is `nullptr` (points to nothing)\n2. `*ptr` tries to read the value at address 0\n3. The OS says \"That's not your memory!\"\n4. **CRASH!**\n\n**The fix:**\n```cpp\nint* ptr = nullptr;\nif (ptr != nullptr) {\n    std::cout << *ptr << std::endl;  // Safe\n} else {\n    std::cout << \"ptr is null!\" << std::endl;\n}\n```\n\n**PlusPlus-chan says:**\n\"Always check if a pointer is null before using it. This is the #1 C++ crash reason. Never trust a pointer.\""
+    "brokenCode": "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    // Closure captures the loop variable incorrectly\n    for i := 0; i < 3; i++ {\n        go func() {\n            fmt.Println(i)  // i is captured by reference\n        }()\n    }\n    time.Sleep(100 * time.Millisecond)\n}",
+    "errorMessage": "3\n3\n3\n\n(All goroutines print 3 because they capture the same variable.)",
+    "explanation": "Closures capture variables by reference, so all goroutines see the final value of `i`.\n\n**The fix:**\n```go\nfor i := 0; i < 3; i++ {\n    go func(n int) {\n        fmt.Println(n)  // n is captured by value\n    }(i)\n}\n```\n\n**Go-chan says:**\n\"Capture values, not variables, in closures.\""
   },
   "phase3": {
-    "prompt": "Write a C++ program that:\n\n1. Declares `int score = 50`\n2. Declares a pointer `int* scorePtr` that points to `score`\n3. Prints `score`, `scorePtr`, and `*scorePtr`\n4. Uses `scorePtr` to change `score` to 100\n5. Prints `score` again to show it changed\n6. Declares `nullptr` and checks if it's null (prints \"Pointer is null\")\n\nRequirements:\n- Use `#include <iostream>`\n- Use `&` to get address\n- Use `*` to dereference\n- Use `nullptr`",
+    "prompt": "Write a Go program that:\n\n1. Launches 4 goroutines using a named function `printHello`\n2. Launches 2 goroutines using an anonymous function\n3. Each goroutine prints its ID\n4. Uses `time.Sleep` to wait for all to finish\n\nRequirements:\n- No semicolons\n- Use `go` with named function\n- Use `go` with anonymous function",
     "validationPattern": {
-      "required": ["int*", "&", "*", "nullptr", "std::cout"],
-      "forbidden": ["using namespace"],
-      "fullRegex": "int\\s+\\w+\\s*=\\s*50[\\s\\S]*int\\s*\\*\\s*\\w+\\s*=\\s*&[\\s\\S]*\\*\\w+\\s*=\\s*100[\\s\\S]*nullptr[\\s\\S]*=="
+      "required": ["go printHello", "go func", "time.Sleep", "fmt.Println"],
+      "forbidden": [";"],
+      "fullRegex": "go\\s+printHello[\\s\\S]*go\\s+func[\\s\\S]*time\\.Sleep[\\s\\S]*fmt\\.Println"
     },
     "dialogueHints": [
-      "Declare score: `int score = 50;`",
-      "Pointer: `int* scorePtr = &score;`",
-      "Change: `*scorePtr = 100;`",
-      "Null check: `int* nullPtr = nullptr; if (nullPtr == nullptr)`"
+      "`func printHello(id int) { fmt.Printf(\"Hello from %d\\n\", id) }`",
+      "Named goroutines: `go printHello(i)` in a loop",
+      "Anonymous: `go func() { fmt.Println(\"Anonymous\") }()`",
+      "Sleep: `time.Sleep(100 * time.Millisecond)`"
     ],
-    "solution": "#include <iostream>\n\nint main() {\n    int score = 50;\n    int* scorePtr = &score;\n    \n    std::cout << \"score: \" << score << std::endl;\n    std::cout << \"scorePtr: \" << scorePtr << std::endl;\n    std::cout << \"*scorePtr: \" << *scorePtr << std::endl;\n    \n    *scorePtr = 100;\n    std::cout << \"After *scorePtr = 100, score: \" << score << std::endl;\n    \n    int* nullPtr = nullptr;\n    if (nullPtr == nullptr) {\n        std::cout << \"Pointer is null\" << std::endl;\n    }\n    \n    return 0;\n}",
-    "openingDialogue": "Master pointers. Master C++. 🔗"
+    "solution": "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc printHello(id int) {\n    fmt.Printf(\"Hello from %d\\n\", id)\n}\n\nfunc main() {\n    for i := 1; i <= 4; i++ {\n        go printHello(i)\n    }\n    \n    for i := 1; i <= 2; i++ {\n        go func(n int) {\n            fmt.Printf(\"Anonymous from %d\\n\", n)\n        }(i)\n    }\n    \n    time.Sleep(100 * time.Millisecond)\n    fmt.Println(\"Done\")\n}",
+    "openingDialogue": "Launch goroutines. Any function. Show me. 🦫"
   },
   "xpReward": 10
 }
