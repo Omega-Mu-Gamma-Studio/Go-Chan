@@ -24,7 +24,7 @@ const UNIT_DATA = {
 };
 
 const LESSON_DATA = {
-  // Unit 1 — C++ Foundations 
+  // Unit 1 — Go Basics 
   '1.1':  () => import('../data/lessons/unit1/1.1.json'),
   '1.2':  () => import('../data/lessons/unit1/1.2.json'),
   '1.3':  () => import('../data/lessons/unit1/1.3.json'),
@@ -41,7 +41,7 @@ const LESSON_DATA = {
   '1.14': () => import('../data/lessons/unit1/1.14.json'),
   '1.15': () => import('../data/lessons/unit1/1.15.json'),
 
-  // Unit 2 — Object Oriented C++
+  // Unit 2 — Composite Types and Methods
   '2.1':  () => import('../data/lessons/unit2/2.1.json'),
   '2.2':  () => import('../data/lessons/unit2/2.2.json'),
   '2.3':  () => import('../data/lessons/unit2/2.3.json'),
@@ -58,7 +58,7 @@ const LESSON_DATA = {
   '2.14': () => import('../data/lessons/unit2/2.14.json'),
   '2.15': () => import('../data/lessons/unit2/2.15.json'),
 
-  // Unit 3 — Memory & Pointers
+  // Unit 3 — Goroutines and Concurrency
   '3.1':  () => import('../data/lessons/unit3/3.1.json'),
   '3.2':  () => import('../data/lessons/unit3/3.2.json'),
   '3.3':  () => import('../data/lessons/unit3/3.3.json'),
@@ -75,7 +75,7 @@ const LESSON_DATA = {
   '3.14': () => import('../data/lessons/unit3/3.14.json'),
   '3.15': () => import('../data/lessons/unit3/3.15.json'),
 
-  // Unit 4 — STL & Templates
+  // Unit 4 — The Standard Library and HTTP
   '4.1':  () => import('../data/lessons/unit4/4.1.json'),
   '4.2':  () => import('../data/lessons/unit4/4.2.json'),
   '4.3':  () => import('../data/lessons/unit4/4.3.json'),
@@ -92,7 +92,7 @@ const LESSON_DATA = {
   '4.14': () => import('../data/lessons/unit4/4.14.json'),
   '4.15': () => import('../data/lessons/unit4/4.15.json'),
 
-  // Unit 5 — File I/O, Error Handling & Shipping
+  // Unit 5 — Testing, Modules, and Final Project
   '5.1':  () => import('../data/lessons/unit5/5.1.json'),
   '5.2':  () => import('../data/lessons/unit5/5.2.json'),
   '5.3':  () => import('../data/lessons/unit5/5.3.json'),

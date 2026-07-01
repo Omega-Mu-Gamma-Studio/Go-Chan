@@ -3,14 +3,14 @@ import './CodeBlock.css';
 /**
  * CodeBlock.jsx
  * 
- * Renders syntax-highlighted C++ code.
+ * Renders syntax-highlighted Go code.
  * Uses a pure CSS approach with <span> tokens.
  * 
  * For Phase 1, we do simple keyword-based tokenization.
- * The tokenizer lives in utils/CppHighlighter.js
+ * The tokenizer lives in utils/GoHighlighter.js
  */
 
-import { tokenize } from '../../utils/CppHighlighter';
+import { tokenize } from '../../utils/GoHighlighter';
 
 const CodeBlock = ({ code = '', label = '', showLineNumbers = true }) => {
   if (!code || code.trim() === '' || code.startsWith('// No code')) {

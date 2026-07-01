@@ -2,7 +2,7 @@
  * patternMatcher.js
  * 
  * Validates student code against lesson patterns.
- * No C++ execution — this is intentional for Phase 1.
+ * No Go execution — this is intentional for Phase 1.
  * 
  * Pattern shape (from lesson JSON):
  * {

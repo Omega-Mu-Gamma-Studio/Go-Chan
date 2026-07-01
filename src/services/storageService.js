@@ -40,9 +40,9 @@ const localAdapter = {
   },
 
   clear: () => {
-    // Only clear pluspluschan-prefixed keys
+    // Only clear gochan-prefixed keys
     Object.keys(localStorage)
-      .filter(k => k.startsWith('pluspluschan-'))
+      .filter(k => k.startsWith('gochan-'))
       .forEach(k => localStorage.removeItem(k));
   },
 };
@@ -75,12 +75,12 @@ const adapter = USE_DATABASE ? apiAdapter : localAdapter;
 // ---- Public API ----
 export const storageService = {
   // User settings (theme, sound on/off etc.)
-  getSettings: () => adapter.get('pluspluschan-settings') || {},
-  saveSettings: (settings) => adapter.set('pluspluschan-settings', settings),
+  getSettings: () => adapter.get('gochan-settings') || {},
+  saveSettings: (settings) => adapter.set('gochan-settings', settings),
 
   // Cached lesson data (optional optimization)
-  getCachedLesson: (lessonId) => adapter.get(`pluspluschan-lesson-${lessonId}`),
-  cacheLesson: (lessonId, data) => adapter.set(`pluspluschan-lesson-${lessonId}`, data),
+  getCachedLesson: (lessonId) => adapter.get(`gochan-lesson-${lessonId}`),
+  cacheLesson: (lessonId, data) => adapter.set(`gochan-lesson-${lessonId}`, data),
 
   // Generic escape hatch
   get: (key) => adapter.get(key),
